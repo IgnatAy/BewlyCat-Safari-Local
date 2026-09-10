@@ -1,0 +1,160 @@
+{
+  "manifest_version": 3,
+  "name": "BewlyCat",
+  "version": "1.7.8",
+  "description": "Just make a few small changes to your Bilibili homepage.",
+  "homepage_url": "https://github.com/keleus/BewlyCat",
+  "background": {
+    "scripts": [
+      "./dist/background/index.js"
+    ],
+    "persistent": false,
+    "type": "module"
+  },
+  "icons": {
+    "16": "assets/icon-512.png",
+    "48": "assets/icon-512.png",
+    "128": "assets/icon-512.png"
+  },
+  "permissions": [
+    "storage",
+    "declarativeNetRequestWithHostAccess",
+    "cookies"
+  ],
+  "host_permissions": [
+    "*://*.bilibili.com/*",
+    "*://*.hdslb.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.bilibili.com/",
+        "*://www.bilibili.com/index.html*",
+        "*://www.bilibili.com/video/*",
+        "*://www.bilibili.com/list/*",
+        "*://www.bilibili.com/bangumi/play/*",
+        "*://www.bilibili.com/festival/*",
+        "*://www.bilibili.com/watchlater*",
+        "*://www.bilibili.com/v/*",
+        "*://www.bilibili.com/c/*",
+        "*://www.bilibili.com/anime*",
+        "*://www.bilibili.com/guochuang*",
+        "*://www.bilibili.com/tv*",
+        "*://www.bilibili.com/movie*",
+        "*://www.bilibili.com/variety*",
+        "*://www.bilibili.com/mooc*",
+        "*://www.bilibili.com/documentary*",
+        "*://www.bilibili.com/opus/*",
+        "*://www.bilibili.com/history*",
+        "*://www.bilibili.com/account/history*",
+        "*://www.bilibili.com/read/*",
+        "*://www.bilibili.com/404*",
+        "*://search.bilibili.com/*",
+        "*://t.bilibili.com/*",
+        "*://space.bilibili.com/*",
+        "*://message.bilibili.com/*",
+        "*://member.bilibili.com/platform*",
+        "*://account.bilibili.com/*",
+        "*://passport.bilibili.com/login*",
+        "*://music.bilibili.com/pc/music-center*"
+      ],
+      "exclude_matches": [
+        "*://www.bilibili.com/match/game*",
+        "*://www.bilibili.com/toy*",
+        "*://t.bilibili.com/vote*",
+        "*://t.bilibili.com/share*",
+        "*://t.bilibili.com/pages/nav*"
+      ],
+      "js": [
+        "./dist/contentScripts/index.global.js"
+      ],
+      "css": [
+        "./dist/contentScripts/style.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://www.bilibili.com/",
+        "*://www.bilibili.com/index.html*",
+        "*://www.bilibili.com/video/*",
+        "*://www.bilibili.com/list/*",
+        "*://www.bilibili.com/bangumi/play/*",
+        "*://www.bilibili.com/festival/*",
+        "*://www.bilibili.com/watchlater*",
+        "*://www.bilibili.com/v/*",
+        "*://www.bilibili.com/c/*",
+        "*://www.bilibili.com/anime*",
+        "*://www.bilibili.com/guochuang*",
+        "*://www.bilibili.com/tv*",
+        "*://www.bilibili.com/movie*",
+        "*://www.bilibili.com/variety*",
+        "*://www.bilibili.com/mooc*",
+        "*://www.bilibili.com/documentary*",
+        "*://www.bilibili.com/opus/*",
+        "*://www.bilibili.com/history*",
+        "*://www.bilibili.com/account/history*",
+        "*://www.bilibili.com/read/*",
+        "*://www.bilibili.com/404*",
+        "*://search.bilibili.com/*",
+        "*://t.bilibili.com/*",
+        "*://space.bilibili.com/*",
+        "*://message.bilibili.com/*",
+        "*://member.bilibili.com/platform*",
+        "*://account.bilibili.com/*",
+        "*://passport.bilibili.com/login*",
+        "*://music.bilibili.com/pc/music-center*"
+      ],
+      "exclude_matches": [
+        "*://www.bilibili.com/match/game*",
+        "*://www.bilibili.com/toy*",
+        "*://t.bilibili.com/vote*",
+        "*://t.bilibili.com/share*",
+        "*://t.bilibili.com/pages/nav*"
+      ],
+      "js": [
+        "./dist/contentScripts/inject.global.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false,
+      "world": "MAIN"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "dist/contentScripts/style.css",
+        "assets/*"
+      ],
+      "matches": [
+        "*://www.bilibili.com/*",
+        "*://search.bilibili.com/*",
+        "*://t.bilibili.com/*",
+        "*://space.bilibili.com/*",
+        "*://message.bilibili.com/*",
+        "*://member.bilibili.com/*",
+        "*://account.bilibili.com/*",
+        "*://passport.bilibili.com/*",
+        "*://music.bilibili.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "assets/rules-safari.json"
+      }
+    ]
+  },
+  "browser_specific_settings": {
+    "safari": {
+      "strict_min_version": "18.4"
+    }
+  }
+}
